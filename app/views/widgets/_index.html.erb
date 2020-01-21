@@ -1,16 +1,16 @@
 <h3 class="text-center">Widgets</h3>
 <!-- <div class="col-md-12">
 	<p>
-		Name: <%= @widgets.first[:name]%>
+		Name: <%#= @widgets.first[:name]%>
 	</p>
 	<p>
-		Name: <%= @widgets.first[:name]%>
+		Name: <%#= @widgets.first[:name]%>
 	</p>
 	<p>
-		Name: <%= @widgets.first[:name]%>
+		Name: <%#= @widgets.first[:name]%>
 	</p>
 	<p>
-		Name: <%= @widgets.first[:name]%>
+		Name: <%#= @widgets.first[:name]%>
 	</p>
 </div> -->
 <table class="table table-striped">
@@ -31,7 +31,11 @@
 					<td>
 						<%= widget["user"]["name"]%>
 						<% if current_user && params[:user_id].blank?%>
-							(<%= link_to "View user's widgets",widgets_index_path(user_id: widget["user"]["id"])%>)
+							(<%= link_to "View user's widgets",widgets_path(user_id: widget["user"]["id"])%>)
+						<%end%>
+						
+						<% if current_user.present? && widget["user"]["name"] == (current_user.first_name + " " + current_user.last_name)%>
+							<%= link_to "Update",edit_widget_path(widget["id"],name: widget["name"],description: widget["description"]),remote: true%> | <%= link_to "Delete",widget_path(widget["id"]),method: :delete%>
 						<%end%>
 					</td>
 				</tr>
@@ -39,6 +43,6 @@
 	</tbody>
 </table>
 
-<div class="text-center">
-	<%= will_paginate @widgets, renderer: BootstrapPagination::Rails %>
+<div class="text-center" id="div_widgets_paginate">
+	<%= will_paginate @widgets, renderer: BootstrapPagination::Rails,params: params,remote: true %>
 </div>

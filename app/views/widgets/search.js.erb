@@ -1,2 +1,3 @@
 $("#div_visible_widgets").html("<%= escape_javascript(render(:partial => 'index')) %>");
-  
+//$("#div_widgets_paginate").html("<%= will_paginate @widgets, renderer: BootstrapPagination::Rails,params: params,remote: true %>")
+$('.pagination > a').attr('data-remote', 'true');

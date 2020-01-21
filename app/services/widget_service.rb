@@ -45,5 +45,47 @@ class WidgetService
 		end
 	end
 
+	def create_widget(user,widget_data)
+		is_created = false
+		begin
+			response = RestClient.post "https://showoff-rails-react-production.herokuapp.com/api/v1/widgets", {widget: {name: widget_data[:name],kind: widget_data[:kind],description: widget_data[:description]}}.to_json, {:Authorization => "Bearer #{user.access_token}",content_type: :json, accept: :json}
+			puts response = JSON.parse(response.body)
+			if response["code"] == 0
+				is_created = true
+			end
+		rescue => ex
+		 	puts ex
+		end
+		is_created
+	end
+
+	def update_widget(user,widget_data,id)
+		is_updated = false
+		begin
+			response = RestClient.put "https://showoff-rails-react-production.herokuapp.com/api/v1/widgets/#{id}", {widget: {name: widget_data[:name],description: widget_data[:description]}}.to_json, {:Authorization => "Bearer #{user.access_token}",content_type: :json, accept: :json}
+			puts response = JSON.parse(response.body)
+			if response["code"] == 0
+				is_updated = true
+			end
+		rescue => ex
+		 	puts ex
+		end
+		is_updated
+	end
+
+	def delete_widget(user,id)
+		is_deleted = false
+		begin
+			response = RestClient.delete "https://showoff-rails-react-production.herokuapp.com/api/v1/widgets/#{id}",{:Authorization => "Bearer #{user.access_token}",content_type: :json, accept: :json}
+			puts response = JSON.parse(response.body)
+			if response["code"] == 0
+				is_deleted = true
+			end
+		rescue => ex
+		 	puts ex
+		end
+		is_deleted
+	end
+
 
 end

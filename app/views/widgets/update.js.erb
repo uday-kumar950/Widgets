@@ -1,0 +1,5 @@
+<%if @is_widget_updated%>
+	window.location.replace("<%= widgets_path%>");
+<%else%>
+	$("#div_modal_update").show().text("Widget not updated!!")
+<%end%>

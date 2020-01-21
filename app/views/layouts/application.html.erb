@@ -22,8 +22,17 @@
 
 		</div>
 	</div>
-	<p id=”notice”><%= notice %></p>
+	<%if notice.present?%>
+		<div class="alert alert-success">
+			<%= notice %>
+		</div>
+	<%end%>
 
+	<%if alert.present?%>
+		<div class="alert alert-danger">
+			<%= alert %>
+		</div>
+	<%end%>
   </head>
 
   <body>

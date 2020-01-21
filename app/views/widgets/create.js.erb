@@ -1,0 +1,5 @@
+<%if @is_widget_created%>
+	window.location.replace("<%= widgets_path%>");
+<%else%>
+	$("#div_modal_error").show().text("Widget not saved!!")
+<%end%>

@@ -22,7 +22,34 @@ class WidgetsController < ApplicationController
   end
 
   def new
-  	@widget = Widget.new  	
+  end
+
+  def create
+  	@is_widget_created = WidgetService.new.create_widget(current_user,params[:widget])
+  	if @is_widget_created
+  		flash[:notice] = "New widget created successfully"
+  	end
+  end
+
+  def edit
+  	@widget_id = params[:id]
+  end
+
+  def update
+  	@is_widget_updated = WidgetService.new.update_widget(current_user,params[:widget],params[:id])
+  	if @is_widget_updated
+  		flash[:notice] = "Widget updated successfully"
+  	end
+  end
+
+  def destroy
+  	is_widget_deleted = WidgetService.new.delete_widget(current_user,params[:id])
+  	if is_widget_deleted
+  		flash[:notice] = "Widget deleted successfully"
+  	else
+  		flash[:alert] = "Widget not deleted!!"
+  	end
+  	redirect_to widgets_path
   end
 
 end

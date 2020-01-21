@@ -1,0 +1,4 @@
+$("#popup_div_widget_update").modal('show');
+$("#update_widget_name").val("<%= params[:name]%>")
+$("#update_widget_desc").val("<%= params[:description]%>")
+$("#form_widget_update").attr('action', "<%= widget_path(params[:id])%>");
