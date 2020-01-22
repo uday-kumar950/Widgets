@@ -20,4 +20,18 @@ class AuthService
 		access_token
 	end
 
+	def reset_password(user,current_password,new_password)
+		is_updated = false
+		begin
+			response = RestClient.post "https://showoff-rails-react-production.herokuapp.com/api/v1/users/me/password", {user: {current_password: current_password,new_password: new_password}}.to_json, {:Authorization => "Bearer #{user.access_token}",content_type: :json, accept: :json}
+			puts response = JSON.parse(response.body)
+			if response["code"] == 0
+				is_updated = true
+			end
+		rescue => ex
+		 	puts ex
+		end
+		is_updated
+	end
+
 end

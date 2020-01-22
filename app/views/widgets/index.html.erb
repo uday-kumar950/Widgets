@@ -1,22 +1,22 @@
-
+<div class="col-md-12"> <h3 class="text-center">Widgets</h3></div>
 <div class="row">
-		<%if params[:user_id].present?%>
-			<div class="col-md-3 pull-left">
-				<%= link_to "Back", widgets_path%>	
-			</div>	
-		<%end%>
-		
-	<%#= form_tag widgets_search_path,class: "",remote: true do%>
-		<div class="col-md-3 pull-right">
-			<%= text_field_tag :term,params[:term],class: "form-control",onkeyup: "search_widgets(this.value)",placeholder: "Search Widgets"%>	
+	<%if params[:user_id].present?%>
+		<div class="col-md-3 pull-left">
+			<%= link_to "Back", widgets_path%>	
+		</div>	
+	<%end%>
+	
+	<div class="col-md-3 pull-right">
+		<%= text_field_tag :term,params[:term],class: "form-control",onkeyup: "search_widgets(this.value)",placeholder: "Search Widgets"%>	
+	</div>
+
+	<%if current_user.present?%>
+		<div class="col-md-2 pull-right text-right">	
+			<button class="btn btn-primary btn-create" data-toggle= "modal" data-target= "#popup_div">	New Widget</button>
 		</div>
-	<%#end%>
-		<%if current_user.present?%>
-			<div class="col-md-2 pull-right text-right">	
-				<button class="btn btn-primary btn-create" data-toggle= "modal" data-target= "#popup_div">	New Widget</button>&nbsp;&nbsp;
-			</div>
-		<%end%>
+	<%end%>
 </div>
+
 <div class="row" id="div_visible_widgets">
 	<%= render 'index'%>
 </div>

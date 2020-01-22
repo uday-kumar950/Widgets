@@ -27,8 +27,11 @@ class UsersController < ApplicationController
     access_token = AuthService.new.create_user(user_params)
     @user = User.new(user_params)
     respond_to do |format|
-      if @user.save
-         @user.update_attribute(:access_token,access_token)
+      if access_token.blank?
+        format.html { render :new }
+        format.json { render json: [], status: :unprocessable_entity }
+      elsif @user.save && access_token.present?
+        @user.update_attribute(:access_token,access_token)
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -59,6 +62,31 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def update_password
+  end
+
+
+  def reset_password
+    user = User.find_by_email(params[:email])
+    if params[:current_password] == params[:new_password]
+      flash[:alert] = "current password and new password should not be same"
+      redirect_to update_password_users_path
+    elsif user.present? 
+      is_updated = AuthService.new.reset_password(user,params[:current_password],params[:new_password]) 
+      unless !is_updated
+        user.update_attribute(:password,params[:new_password])
+        flash[:notice] = "Successfully updated password"
+        redirect_to login_path
+      else
+        flash[:alert] = "Password not updated"
+        redirect_to update_password_users_path
+      end        
+    else
+      flash[:alert] = "User not present with email #{params[:email]}"
+      redirect_to update_password_users_path
     end
   end
 

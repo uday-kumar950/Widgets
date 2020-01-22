@@ -8,13 +8,11 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 	<div class="topnav">
-		<a class="active" href="#home">Home</a>
-		<a href="#about">About</a>
-		<a href="#contact">Contact</a>
-		<div class="login-container">
+		<a class="active" href="<%= widgets_path%>">Home</a>
+		<div class="login-container" style="width: 30%">
 			<% if current_user %>
-				Logged in as <%= current_user.email %>.
-				<%= link_to "Log Out", logout_path %>
+				<span><%= link_to "Logged in as #{current_user.email}","#"%></span>
+				<span><b><%= link_to "Log Out", logout_path %></b></span>
 			<% else %>
 				<%= link_to "Log In", login_path %>
 				<%= link_to "Sign Up", signup_path %>  
