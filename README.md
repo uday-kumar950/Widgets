@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Using Rails (~> 5.1.7) and Ruby (2.4.1)
 
-Things you may want to cover:
+* Create a new user via Sign Up link.
 
-* Ruby version
+* Login with a user in able to create new/edit/delete widgets.
 
-* System dependencies
+* Through `View user's widgets` link, you can view all widgets created by the user.
 
-* Configuration
+* View user details through the `user details` link.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Reset your password from login page.
