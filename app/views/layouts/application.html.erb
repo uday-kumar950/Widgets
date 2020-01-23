@@ -12,13 +12,13 @@
 		<%if current_user.present?%>
 			<a class="inactive" href="<%= details_user_path(current_user)%>">User Details</a>
 		<%end%>
-		<div class="login-container" style="width: 30%">
+		<div class="login-container" style="width: 40%">
 			<% if current_user %>
-				<span><%= link_to "Logged in as #{current_user.email}","#"%></span>
-				<span><b><%= link_to "Log Out", logout_path %></b></span>
+				<span><%= link_to "Logged in as #{current_user.email}","#",class: "pull-right"%></span>
+				<span><b><%= link_to "Log Out", logout_path,class: "pull-right" %></b></span>
 			<% else %>
-				<%= link_to "Log In", login_path %>
-				<%= link_to "Sign Up", signup_path %>  
+				<%= link_to "Sign Up", signup_path,class: "pull-right" %>  
+				<%= link_to "Log In", login_path,class: "pull-right" %>
 			<% end %>
 
 		</div>
