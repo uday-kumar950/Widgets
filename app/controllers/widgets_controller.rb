@@ -3,7 +3,6 @@ class WidgetsController < ApplicationController
 
   def index
   	if params[:user_id].present?
-  		@user_details = WidgetService.new.get_user_details(current_user,params[:user_id])
   		@widgets = WidgetService.new.user_widgets(current_user,params[:user_id]) 
   	else
   		@widgets = WidgetService.new.visible_data
@@ -13,10 +12,9 @@ class WidgetsController < ApplicationController
 
   def search
   	if params[:user_id].present?
-  		@user_details = WidgetService.new.get_user_details(current_user,params[:user_id])
-  		@widgets = WidgetService.new.user_widgets(current_user,params[:user_id]) 
+  		@widgets = WidgetService.new.search_user_visible_widgets(current_user,params[:user_id],params[:term]) 
   	else
-  		@widgets = WidgetService.new.search_visible_widget(params[:term])
+  		@widgets = WidgetService.new.search_visible_widgets(params[:term])
   	end
   	@widgets = @widgets.paginate(page: params[:page], per_page: 5)
   end

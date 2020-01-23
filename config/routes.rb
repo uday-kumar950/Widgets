@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
   resources :users do
+  	member do
+  		get :details
+  	end
   	collection do
   		get :update_password
   		post :reset_password

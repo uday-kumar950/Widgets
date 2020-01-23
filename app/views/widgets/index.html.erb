@@ -96,16 +96,17 @@
 
 <script type="text/javascript">
 	function search_widgets(term){
+	var user_id = "<%= params[:user_id]%>"
 	$.ajax({
-		url: "/widgets/search?term=" + term,
+		url: "/widgets/search?term="+term+"&user_id="+user_id+"",
 		type: "GET",
 		dataType: "script",
 		success: function(result){
-			console.log("successsssssssssssssss")
-			},
-			error: function(result){
-			console.log("errorrrrrrrrrrrr")
-			}
+			console.log("success")
+		},
+		error: function(result){
+			console.log("error")
+		}
 	});
 	}
 </script>
